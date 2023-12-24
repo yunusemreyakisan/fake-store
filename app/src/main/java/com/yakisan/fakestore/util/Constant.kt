@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalFocusManager
 
 object Constant {
-    const val BASE_URL = "http://10.0.2.2:8080/"
+    const val BASE_URL = "https://fakestoreapi.com/"
 }
 
 //Getting screen focus manager

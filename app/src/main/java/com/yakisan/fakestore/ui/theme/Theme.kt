@@ -25,15 +25,15 @@ import com.yakisan.fakestore.core.LocalAppDimens
 import com.yakisan.fakestore.core.ProvideAppUtils
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Primary900,
+    secondary = Secondary900,
+    tertiary = White
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Primary900,
+    secondary = Secondary900,
+    tertiary = Dark4
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -46,14 +46,15 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun FakeStoreTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    statusBarColor: Color? = if (darkTheme) Color.DarkGray else White,
-    navigationBarColor: Color? = if (darkTheme) Color.DarkGray else White,
+    statusBarColor: androidx.compose.ui.graphics.Color? = if (darkTheme) Dark1 else White,
+    navigationBarColor: androidx.compose.ui.graphics.Color? = if (darkTheme) Dark1 else White,
     activity: Activity = LocalContext.current as MainActivity,
     content: @Composable () -> Unit
 ) {

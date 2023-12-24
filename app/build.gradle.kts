@@ -76,6 +76,8 @@ dependencies {
     implementation("androidx.compose.material3:material3-window-size-class:1.1.2") //Window Size
     implementation("com.google.dagger:hilt-android:2.48") //Hilt for DI
     kapt("com.google.dagger:hilt-android-compiler:2.48") //Hilt Compiler for DI
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0") //Hilt for Navigation
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4") //LiveData
     implementation("com.squareup.retrofit2:retrofit:2.9.0") //Retrofit for API
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") //Converter for API
     implementation("io.coil-kt:coil-compose:2.4.0") //Coil for Images

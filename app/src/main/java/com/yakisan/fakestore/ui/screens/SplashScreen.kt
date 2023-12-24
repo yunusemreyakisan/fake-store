@@ -44,7 +44,7 @@ fun SplashScreen(navController: NavController) {
             Image(
                 modifier = Modifier
                     .size(MaterialTheme.dimens.logoSize / 1.5f),
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Fake Store logo"
             )
         }
