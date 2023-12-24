@@ -6,6 +6,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalFocusManager
+import com.yakisan.fakestore.ui.theme.Dark1
 
 object Constant {
     const val BASE_URL = "https://fakestoreapi.com/"
@@ -20,11 +21,11 @@ fun getFocusManager(): FocusManager {
 //Getting theme
 @Composable
 fun getTheme(): androidx.compose.ui.graphics.Color {
-    return if (isSystemInDarkTheme()) DarkGray else White
+    return if (isSystemInDarkTheme()) Dark1 else White
 }
 
 //Getting text theme
 @Composable
 fun getTextTheme(): androidx.compose.ui.graphics.Color {
-    return if (isSystemInDarkTheme()) White else DarkGray
+    return if (isSystemInDarkTheme()) White else Dark1
 }

@@ -53,8 +53,8 @@ fun FakeStoreTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    statusBarColor: androidx.compose.ui.graphics.Color? = if (darkTheme) Dark1 else White,
-    navigationBarColor: androidx.compose.ui.graphics.Color? = if (darkTheme) Dark1 else White,
+    statusBarColor: Color? = if (darkTheme) Dark1 else White,
+    navigationBarColor: Color? = if (darkTheme) Dark1 else White,
     activity: Activity = LocalContext.current as MainActivity,
     content: @Composable () -> Unit
 ) {
