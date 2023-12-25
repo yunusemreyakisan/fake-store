@@ -3,6 +3,7 @@ package com.yakisan.fakestore.components
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,6 +22,7 @@ import com.yakisan.fakestore.ui.theme.Dark2
 import com.yakisan.fakestore.ui.theme.Greyscale100
 import com.yakisan.fakestore.ui.theme.Greyscale600
 import com.yakisan.fakestore.ui.theme.Greyscale900
+import com.yakisan.fakestore.ui.theme.dimens
 import com.yakisan.fakestore.util.getTextTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +43,8 @@ fun BaseTextField(
         value = value,
         onValueChange = { onValueChange(it) },
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(MaterialTheme.dimens.medium2),
         colors = TextFieldDefaults.textFieldColors(
             containerColor = if (isSystemInDarkTheme()) Dark2 else Greyscale100,
             disabledTextColor = if (isSystemInDarkTheme()) Dark2 else Greyscale100,

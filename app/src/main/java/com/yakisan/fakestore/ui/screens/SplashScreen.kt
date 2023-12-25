@@ -6,6 +6,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +18,7 @@ import com.yakisan.fakestore.R
 import com.yakisan.fakestore.navigation.Screen
 import com.yakisan.fakestore.ui.theme.FakeStoreTheme
 import com.yakisan.fakestore.ui.theme.dimens
+import com.yakisan.fakestore.util.getTextTheme
 import com.yakisan.fakestore.util.getTheme
 import kotlinx.coroutines.delay
 
@@ -41,11 +43,12 @@ fun SplashScreen(navController: NavController) {
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Image(
+            Icon(
                 modifier = Modifier
                     .size(MaterialTheme.dimens.logoSize / 1.5f),
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Fake Store logo"
+                contentDescription = "Fake Store logo",
+                tint = getTextTheme()
             )
         }
     }

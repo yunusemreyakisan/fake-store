@@ -1,80 +1,109 @@
-package com.yakisan.fakestore.components
+package com.yakisan.fakestore.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.yakisan.fakestore.R
+import com.yakisan.fakestore.components.StarRatingBar
 import com.yakisan.fakestore.model.Product
-import com.yakisan.fakestore.ui.theme.BackgroundRed
+import com.yakisan.fakestore.navigation.Screen
 import com.yakisan.fakestore.ui.theme.Dark2
-import com.yakisan.fakestore.ui.theme.Greyscale100
-import com.yakisan.fakestore.ui.theme.Greyscale500
-import com.yakisan.fakestore.ui.theme.Red
-import com.yakisan.fakestore.ui.theme.TransparentRed
+import com.yakisan.fakestore.ui.theme.FakeStoreTheme
 import com.yakisan.fakestore.ui.theme.White
-import com.yakisan.fakestore.ui.theme.Yellow
 import com.yakisan.fakestore.ui.theme.dimens
+import com.yakisan.fakestore.util.Resource
+import com.yakisan.fakestore.util.ResourceState
+import com.yakisan.fakestore.util.ResourceState.LoadingState
 import com.yakisan.fakestore.util.getTextTheme
 import com.yakisan.fakestore.util.getTheme
+import com.yakisan.fakestore.viewmodel.ProductViewModel
 
 @Composable
-fun ProductCard(
-    product: Product,
-    onItemClick: () -> Unit
+fun ProductDetailScreen(
+    navController: NavHostController,
+    productId: Int,
+    productViewModel: ProductViewModel = hiltViewModel()
 ) {
+    val productById by productViewModel.product.observeAsState() //Product by id
+
+    LaunchedEffect(productId) {
+        productViewModel.fetchProductById(productId)
+    }
+
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+
+
+        when (val resource = productById) {
+            is Resource.Loading -> {
+                LoadingState()
+            }
+
+            is Resource.Success -> {
+                val product = resource.data!!
+                ProductDetailCard(product = product, navController)
+
+            }
+
+            is Resource.Error -> {
+                ResourceState.ErrorState(errorMessage = "Ürün çekilemedi")
+            }
+
+            else -> {}
+        }
+
+    }
+
+}
+
+
+@Composable
+fun ProductDetailCard(product: Product, navController: NavController) {
     //Card
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(MaterialTheme.dimens.small2)
             .wrapContentHeight()
             .shadow(
-                shape = RoundedCornerShape(15),
+                shape = RoundedCornerShape(10),
                 elevation = 2.dp,
-            )
-            .clickable {
-                onItemClick.invoke() //Clickable Product
-            },
+            ),
         colors = CardDefaults.cardColors(
             containerColor = if (isSystemInDarkTheme()) Dark2 else getTheme()
         ),
@@ -84,15 +113,30 @@ fun ProductCard(
                 .fillMaxSize()
                 .padding(MaterialTheme.dimens.medium2),
         ) {
+            Icon(
+                modifier = Modifier
+                    .size(MaterialTheme.dimens.logoSize / 2)
+                    .clickable {
+                        navController.navigate(Screen.HomeScreen.route)
+                    },
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = "back icon",
+                tint = getTextTheme()
+            )
+
+            Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(15))
+                    .clip(shape = RoundedCornerShape(5))
                     .background(color = White),
                 contentAlignment = Alignment.Center,
             ) {
                 AsyncImage(
-                    modifier = Modifier.size(MaterialTheme.dimens.large),
+                    modifier = Modifier
+                        .size(MaterialTheme.dimens.large * 4)
+                        .padding(MaterialTheme.dimens.small2),
                     model = product.image,
                     placeholder = painterResource(id = R.drawable.logo),
                     error = painterResource(id = R.drawable.ic_error),
@@ -105,8 +149,7 @@ fun ProductCard(
 
             Text(
                 text = product.title.toString(),
-                style = MaterialTheme.typography.titleSmall,
-                maxLines = 2,
+                style = MaterialTheme.typography.headlineSmall,
                 overflow = TextOverflow.Ellipsis,
                 color = getTextTheme()
             )
@@ -115,7 +158,15 @@ fun ProductCard(
 
             Text(
                 text = product.category.toString().uppercase(),
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.titleMedium,
+                color = getTextTheme()
+            )
+
+            Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
+
+            Text(
+                text = product.description.toString(),
+                style = MaterialTheme.typography.titleMedium,
                 color = getTextTheme()
             )
 
@@ -131,7 +182,7 @@ fun ProductCard(
 
             Text(
                 text = "$ ${product.price.toString()}",
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.headlineSmall,
                 color = getTextTheme()
             )
 
@@ -141,6 +192,4 @@ fun ProductCard(
 
     }
 }
-
-
 

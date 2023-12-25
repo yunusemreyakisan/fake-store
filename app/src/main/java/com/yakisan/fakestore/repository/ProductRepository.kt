@@ -17,8 +17,27 @@ class ProductRepository @Inject constructor(
         return try {
             productService.getProducts()
         } catch (e: Exception) {
-            // Hata yönetimini burada gerçekleştirebilirsiniz
             emptyList()
         }
     }
+
+    //Getting specific products
+    suspend fun getProductByCategory(category: String): List<Product> {
+        return try {
+            productService.getProductsByCategory(category)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    //Getting specific product by id
+    suspend fun getProductById(productId: Int): Product {
+        return try {
+            productService.getProductById(productId)
+        } catch (e: Exception) {
+            Log.e("ProductID", "Not Found this product")
+            return Product()
+        }
+    }
+
 }

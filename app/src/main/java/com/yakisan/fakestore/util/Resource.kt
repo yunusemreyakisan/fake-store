@@ -1,7 +1,7 @@
 package com.yakisan.fakestore.util
 
 sealed class Resource<T>(
-    val data: T? = null,
+    var data: T? = null,
     val message: String? = null
 ) {
     class Loading<T> : Resource<T>()
