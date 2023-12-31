@@ -91,7 +91,6 @@ fun ProductDetailScreen(
 
 }
 
-
 @Composable
 fun ProductDetailCard(product: Product, navController: NavController) {
     //Card

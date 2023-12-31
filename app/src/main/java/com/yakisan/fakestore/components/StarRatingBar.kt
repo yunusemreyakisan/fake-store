@@ -14,6 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.valentinilk.shimmer.ShimmerBounds
+import com.valentinilk.shimmer.rememberShimmer
+import com.valentinilk.shimmer.shimmer
 import com.yakisan.fakestore.ui.theme.Red
 import com.yakisan.fakestore.ui.theme.dimens
 import com.yakisan.fakestore.util.getTextTheme

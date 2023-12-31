@@ -81,8 +81,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0") //Retrofit for API
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") //Converter for API
     implementation("io.coil-kt:coil-compose:2.4.0") //Coil for Images
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
-    implementation("com.github.erenalpaslan:removebg:1.0.4") //Background Remover for Products
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0") //Swipe Refresh for List
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.2.0") //Shimmer for Product Card
 }
 
 // Allow references to generated code

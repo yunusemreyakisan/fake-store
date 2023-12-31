@@ -44,6 +44,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.valentinilk.shimmer.ShimmerBounds
+import com.valentinilk.shimmer.rememberShimmer
+import com.valentinilk.shimmer.shimmer
 import com.yakisan.fakestore.R
 import com.yakisan.fakestore.model.Product
 import com.yakisan.fakestore.ui.theme.BackgroundRed
@@ -63,6 +66,7 @@ fun ProductCard(
     product: Product,
     onItemClick: () -> Unit
 ) {
+    val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.Window)
     //Card
     ElevatedCard(
         modifier = Modifier
@@ -88,7 +92,8 @@ fun ProductCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(15))
-                    .background(color = White),
+                    .background(color = White)
+                    .shimmer(shimmerInstance),
                 contentAlignment = Alignment.Center,
             ) {
                 AsyncImage(
@@ -104,6 +109,7 @@ fun ProductCard(
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
 
             Text(
+                modifier = Modifier.shimmer(shimmerInstance),
                 text = product.title.toString(),
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = 2,
@@ -114,6 +120,7 @@ fun ProductCard(
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
 
             Text(
+                modifier = Modifier.shimmer(shimmerInstance),
                 text = product.category.toString().uppercase(),
                 style = MaterialTheme.typography.bodySmall,
                 color = getTextTheme()
@@ -130,6 +137,7 @@ fun ProductCard(
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
 
             Text(
+                modifier = Modifier.shimmer(shimmerInstance),
                 text = "$ ${product.price.toString()}",
                 style = MaterialTheme.typography.titleSmall,
                 color = getTextTheme()
