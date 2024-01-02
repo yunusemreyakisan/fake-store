@@ -32,6 +32,7 @@ import com.yakisan.fakestore.R
 import com.yakisan.fakestore.components.BaseTextField
 import com.yakisan.fakestore.components.CategoryButton
 import com.yakisan.fakestore.core.Extension.isInternetAvailable
+import com.yakisan.fakestore.core.Extension.noRippleClickable
 import com.yakisan.fakestore.model.Product
 import com.yakisan.fakestore.model.categories
 import com.yakisan.fakestore.ui.theme.FakeStoreTheme
@@ -86,7 +87,7 @@ fun HomeScreen(
                 Icon(
                     modifier = Modifier
                         .size(MaterialTheme.dimens.logoSize / 2)
-                        .clickable {
+                        .noRippleClickable {
                             //navController.navigate(Screen.ProductDetailScreen.route)
                         },
                     painter = painterResource(id = R.drawable.ic_shopping_bag),

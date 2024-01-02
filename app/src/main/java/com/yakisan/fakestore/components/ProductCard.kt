@@ -92,8 +92,7 @@ fun ProductCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(15))
-                    .background(color = White)
-                    .shimmer(shimmerInstance),
+                    .background(color = White),
                 contentAlignment = Alignment.Center,
             ) {
                 AsyncImage(
@@ -109,7 +108,6 @@ fun ProductCard(
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
 
             Text(
-                modifier = Modifier.shimmer(shimmerInstance),
                 text = product.title.toString(),
                 style = MaterialTheme.typography.titleSmall,
                 maxLines = 2,
@@ -120,7 +118,6 @@ fun ProductCard(
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
 
             Text(
-                modifier = Modifier.shimmer(shimmerInstance),
                 text = product.category.toString().uppercase(),
                 style = MaterialTheme.typography.bodySmall,
                 color = getTextTheme()
@@ -137,7 +134,6 @@ fun ProductCard(
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
 
             Text(
-                modifier = Modifier.shimmer(shimmerInstance),
                 text = "$ ${product.price.toString()}",
                 style = MaterialTheme.typography.titleSmall,
                 color = getTextTheme()
